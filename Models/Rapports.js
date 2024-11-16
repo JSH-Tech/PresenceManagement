@@ -5,7 +5,7 @@ const Rapports={
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allownull: false,
+        allowNull: false,
     },
 
     periodeRapport:{
@@ -22,6 +22,17 @@ const Rapports={
         type: DataTypes.TEXT,
         allowNull: false
     },
+
+    idEmploye_Rapport: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'employes',
+            key: 'idEmploye',
+        },
+        allowNull: false,
+        onDelete:"CASCADE",
+        onUpdate:"CASCADE"
+    }
 }
 
 export default Rapports;

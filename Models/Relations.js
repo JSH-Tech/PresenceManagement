@@ -37,6 +37,8 @@ Rapports.belongsTo(Employes);
 Employes.hasMany(demandeConges, { foreignKey: 'idEmploye_DemandeConges' });
 demandeConges.belongsTo(Employes);
 
+
+export {Employes, Rapports, demandeConges, Types, Retards, Absences}
 // Synchronisation des modèles avec la base de données
 
 // (async () => {
