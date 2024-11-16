@@ -41,6 +41,16 @@ const Employes={
         allowNull: false,
     },
     
+    idType_Employe: {  // Clé étrangère vers le modèle Types
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: "Types", // Nom de la table Types
+            key: "idType",  // Clé primaire dans la table Types
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    },
 }
 
 export default Employes;
