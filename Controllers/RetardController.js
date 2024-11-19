@@ -1,6 +1,6 @@
 import Retards from "../Models/Relations.js";
 import Employes from "../Models/Relations.js";
-import bcrypt from "bcryptjs"
+import { validationResult } from "express-validator";
 
 //1- Retourner la liste de tous les retards
 export const listRetards= async (req, res) => {
@@ -17,6 +17,12 @@ export const listRetards= async (req, res) => {
 //2- Ajouter un reartds
 
 export const ajoutRetard= async (req, res) => {
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+
     const infosRetard = req.body
 
     try {
@@ -80,21 +86,10 @@ export const listRetardsEmploye= async (req, res) => {
     const idEmploye = parseInt(req.params.id);
 
     try {
-        const retardsEmploye = await Retards.findAll({where:{idEmploye}});
+        //Cherche l'utilisateur et utiliser getRetards()
+        const employe = await Employes.findByPk(idEmploye);
+        const retardsEmploye = await employe.getRetards();
         res.status(200).json({data:retardsEmploye});
-    } catch (error) {
-        res.status(400).json({message: error.message});
-    }
-}
-
-//6- Retourner le nombre de retards d'un employe
-
-export const nombreRetardsEmploye= async (req, res) => {
-    const idEmploye = parseInt(req.params.id);
-
-    try {
-        const nombreRetardsEmploye = await Retards.count({where:{idEmploye}});
-        res.status(200).json({data:nombreRetardsEmploye});
     } catch (error) {
         res.status(400).json({message: error.message});
     }
