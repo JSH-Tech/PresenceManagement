@@ -1,5 +1,5 @@
-import Rapports from "../Models/Relations.js";
-import Employes from "../Models/Relations.js";
+import {Rapports} from "../Models/Relations.js";
+import {Employes} from "../Models/Relations.js";
 import { validationResult } from "express-validator";
 
 //1- Liste des rapports

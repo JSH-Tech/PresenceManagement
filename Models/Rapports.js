@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-
-const Rapports={
+import connexion from "../config/connexion.js";
+const Rapports=connexion.define("Rapports", {
     idRapport: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -33,6 +33,6 @@ const Rapports={
         onDelete:"CASCADE",
         onUpdate:"CASCADE"
     }
-}
+})
 
 export default Rapports;

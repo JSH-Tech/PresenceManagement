@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-
-const DemandeConges={
+import connexion from "../config/connexion.js";
+const DemandeConges= connexion.define("DemandeConges", {
     idDemandCong: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -35,6 +35,6 @@ const DemandeConges={
         onUpdate: "CASCADE", // Met à jour la clé étrangère si nécessaire
     },
     
-}
+})
 
 export default DemandeConges;

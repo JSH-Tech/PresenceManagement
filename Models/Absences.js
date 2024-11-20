@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
+import connexion from "../config/connexion.js";
 
-const Absence={
+const Absence=connexion.define("Absences", {
     idAbsence: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -38,6 +39,6 @@ const Absence={
         onUpdate: "CASCADE", // Met à jour la clé étrangère si nécessaire
     },
 
-}
+})
 
 export default Absence;

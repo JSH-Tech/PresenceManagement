@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listRetards, ajoutRetard, modifierRetard, supprimerRetard, listRetardsEmploye, nombreRetardsEmploye } from "../Controllers/RetardController.js";
+import { listRetards, ajoutRetard, modifierRetard, supprimerRetard, listRetardsEmploye } from "../Controllers/RetardController.js";
 import retardValide from "../Validations/ValidationRetard.js";
 
 const retardRoute=Router();
@@ -20,7 +20,5 @@ retardRoute.get("/retards", listRetards)
 //liste retatards employe
 .get("/retards/:idRetard", listRetardsEmploye)
 
-// nombre retard employee
-.get("/retards/count/:idEmploye", nombreRetardsEmploye)
 
 export default retardRoute;
