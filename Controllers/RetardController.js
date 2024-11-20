@@ -1,5 +1,5 @@
-import Retards from "../Models/Relations.js";
-import Employes from "../Models/Relations.js";
+import {Retards} from "../Models/Relations.js";
+import {Employes} from "../Models/Relations.js";
 import { validationResult } from "express-validator";
 
 //1- Retourner la liste de tous les retards

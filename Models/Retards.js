@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-
-const Retards={
+import connexion from "../config/connexion.js";
+const Retards=connexion.define("Retards", {
     idRetard: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -36,6 +36,6 @@ const Retards={
         onDelete: "CASCADE", // Supprime les retards si l'employé est supprimé
         onUpdate: "CASCADE", // Met à jour la clé étrangère si nécessaire
     },
-};
+});
 
 export default Retards;

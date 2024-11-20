@@ -2,9 +2,9 @@ import Employes from "./Employes.js";
 import Retards from "./Retards.js";
 import Types from "./Types.js";
 import demandeConges from "./demandeConges.js";
-import connexion from "../config/connexion.js";
 import Absences from "./Absences.js";
 import Rapports from "./Rapports.js";
+
 
 // Association des modèles
 
@@ -18,8 +18,9 @@ import Rapports from "./Rapports.js";
 
 // Définition des relations
 // Employe - Type (One-to-One)
-Employes.belongsTo(Types);
 Types.hasMany(Employes, { foreignKey: 'idType_Employe' });
+Employes.belongsTo(Types, { foreignKey: 'idType_Employe' });
+
 
 // Employe - Retard (One-to-Many)
 Employes.hasMany(Retards, { foreignKey: 'idEmploye_Retards' });
