@@ -99,3 +99,14 @@ export const nombreRetardsEmploye= async (req, res) => {
         res.status(400).json({message: error.message});
     }
 }
+
+
+// @@@Proposition
+// export const ajoutRetard = async (req, res) => {
+//     try {
+//         const nouveauRetard = await Retards.create(req.body); // Sequelize gère les validations
+//         res.status(201).json({ message: "Retard créé avec succès", data: nouveauRetard });
+//     } catch (error) {
+//         res.status(400).json({ message: "Erreur lors de la création du retard", error: error.message });
+//     }
+// };
