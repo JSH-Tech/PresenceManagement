@@ -11,6 +11,9 @@ import retardRoute from "./Routes/RetardRoute.js";
 // Chargement des variables d'environnement
 dotenv.config();
 
+import AbsencesRoute from './Routes/AbsencesRoute.js';
+import TypeRoute from './Routes/TypesRoute.js';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -29,6 +32,12 @@ app.use("/api/rapports", rapportRoute);
 connexion.sync()
   .then(() => console.log("Base de données synchronisée."))
   .catch((err) => console.error("Erreur de synchronisation de la base de données :", err));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/api/absence", AbsencesRoute)
+app.use("/api/type", TypeRoute)
+
 
 // Démarrage du serveur
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));

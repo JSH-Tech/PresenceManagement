@@ -60,7 +60,7 @@ export const modifierRapport = async(req,res)=> {
         await rapport.update(rapportMiseAJour);
         rapport.Reload();
 
-        res.status(200).json({message:"Rapport modifié avec suucces",data:rapportMiseAJour})
+        res.status(200).json({message:"Rapport modifié avec succes",data:rapportMiseAJour})
     }
     catch(err) {
         res.status(500).json({message: err.message});
