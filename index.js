@@ -4,7 +4,7 @@ import helmet from "helmet";
 import compression from "compression";
 import dotenv from "dotenv";
 import connexion from "./config/connexion.js";
-
+import bodyParser from "body-parser";
 import rapportRoute from "./Routes/RapportRoute.js";
 import retardRoute from "./Routes/RetardRoute.js";
 
@@ -23,21 +23,19 @@ app.use(helmet());
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
 app.use("/api/retards", retardRoute);
 app.use("/api/rapports", rapportRoute);
+app.use("/api/absence", AbsencesRoute)
+app.use("/api/type", TypeRoute)
 
 // Synchronisation de la base de données
 connexion.sync()
   .then(() => console.log("Base de données synchronisée."))
   .catch((err) => console.error("Erreur de synchronisation de la base de données :", err));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/api/absence", AbsencesRoute)
-app.use("/api/type", TypeRoute)
-
 
 // Démarrage du serveur
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
