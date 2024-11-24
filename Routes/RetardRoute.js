@@ -6,19 +6,19 @@ const retardRoute=Router();
 
 
 // Récupérer tous les retards
-retardRoute.get("/retards", listRetards)
+retardRoute.get("/listRetards", listRetards)
 
 // Ajouter un retard
-.post("/retards", retardValide, ajoutRetard)
+.post("/ajout", retardValide, ajoutRetard)
 
 // Modifier un retard
-.put("/retards/:idRetard", retardValide, modifierRetard)
+.put("/modifier/:idRetard", retardValide, modifierRetard)
 
 // Supprimer un retard
-.delete("/retards/:idRetard", supprimerRetard)
+.delete("/supprimer/:idRetard", supprimerRetard)
 
-//liste retatards employe
-.get("/retards/:idRetard", listRetardsEmploye)
+//liste retards employe
+.get("/listeRetardEmploye/:idRetard", listRetardsEmploye)
 
 
 export default retardRoute;

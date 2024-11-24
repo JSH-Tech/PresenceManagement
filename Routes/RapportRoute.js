@@ -4,14 +4,14 @@ import rapportValide from "../Validations/validationsRapport.js";
 
 const rapportRoute=Router();
 
-rapportRoute.get("/rapports", listRapports)
+rapportRoute.get("/listRapports", listRapports)
 
-.post("/rapports/ajout", rapportValide, ajoutRapport)
+.post("/ajout", rapportValide, ajoutRapport)
 
-.get("/rapports/:id", listRapportsEmployee)
+.get("/listRapportsEmploye/:id", listRapportsEmployee)
 
-.put("/rapports/:id", rapportValide, modifierRapport)
+.put("/modifier/:id", rapportValide, modifierRapport)
 
-.delete("/rapports/:id", supprimerRapport)
+.delete("/suprimer/:id", supprimerRapport)
 
 export default rapportRoute;
