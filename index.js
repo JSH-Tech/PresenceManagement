@@ -1,40 +1,41 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import compression from 'compression';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import compression from "compression";
+import dotenv from "dotenv";
+import connexion from "./config/connexion.js";
+import bodyParser from "body-parser";
+import rapportRoute from "./Routes/RapportRoute.js";
+import retardRoute from "./Routes/RetardRoute.js";
 
-//@@@Proposition
-// import express from "express";
-// import cors from "cors";
-// import helmet from "helmet";
-// import compression from "compression";
-// import bodyParser from "body-parser";
-// import dotenv from "dotenv";
+// Chargement des variables d'environnement
+dotenv.config();
 
-// import connexion from "./config/connexion.js"; // Importer la connexion
+import AbsencesRoute from './Routes/AbsencesRoute.js';
+import TypeRoute from './Routes/TypesRoute.js';
 
-// dotenv.config();
-// const app = express();
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// // Middlewares
-// app.use(cors());
-// app.use(helmet());
-// app.use(compression());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+// Middlewares globaux
+app.use(cors());
+app.use(helmet());
+app.use(compression());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// // Test de connexion à la base
-// connexion.authenticate()
-//     .then(() => console.log("Connexion à la base de données réussie"))
-//     .catch((err) => console.error("Erreur de connexion à la base : ", err));
+// Routes
+app.use("/api/retards", retardRoute);
+app.use("/api/rapports", rapportRoute);
+app.use("/api/absence", AbsencesRoute)
+app.use("/api/type", TypeRoute)
 
-// // Exemple de route
-// app.get("/", (req, res) => {
-//     res.send("API PresenceManagement opérationnelle !");
-// });
+// Synchronisation de la base de données
+connexion.sync()
+  .then(() => console.log("Base de données synchronisée."))
+  .catch((err) => console.error("Erreur de synchronisation de la base de données :", err));
 
-// // Démarrage du serveur
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+// Démarrage du serveur
+app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));

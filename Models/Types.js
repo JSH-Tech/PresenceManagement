@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-
-const Types={
+import connexion from "../config/connexion.js";
+const Types=connexion.define("Types", {
     idType:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,6 +17,6 @@ const Types={
         type: DataTypes.TEXT,
         allowNull: true
     }
-}
+})
 
 export default Types;
