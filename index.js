@@ -36,7 +36,7 @@ app.use("/api/rapports", rapportRoute);
 app.use("/api/absence", AbsencesRoute)
 app.use("/api/type", TypeRoute)
 app.use("/api/employes", EmployesRoute);
-app.use("/api/demande-conges", DemandeCongesRoute);
+app.use("/api/demandeconges", DemandeCongesRoute);
 
 // Synchronisation de la base de données
 connexion.sync()
