@@ -14,6 +14,10 @@ dotenv.config();
 import AbsencesRoute from './Routes/AbsencesRoute.js';
 import TypeRoute from './Routes/TypesRoute.js';
 
+
+import EmployesRoute from './Routes/EmployesRoute.js';
+import DemandeCongesRoute from './Routes/DemandeCongesRoute.js';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -31,6 +35,8 @@ app.use("/api/retards", retardRoute);
 app.use("/api/rapports", rapportRoute);
 app.use("/api/absence", AbsencesRoute)
 app.use("/api/type", TypeRoute)
+app.use("/api/employes", EmployesRoute);
+app.use("/api/demande-conges", DemandeCongesRoute);
 
 // Synchronisation de la base de données
 connexion.sync()
