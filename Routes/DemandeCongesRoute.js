@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { listDemandesConges, ajoutDemandeConge, modifierDemandeConge, supprimerDemandeConge, listDemandesCongesEmploye } from "../Controllers/DemandesCongesController.js";
-import demandeCongeValide from "../Validations/ValidationDemandesConges.js";
+import { listDemandesConges, ajoutDemandeConge, modifierDemandeConge, supprimerDemandeConge, listDemandesCongesEmploye } from "../Controllers/DemandeCongesController.js";
+import demandeCongeValide from "../Validations/ValidationDemandeConges.js";
 
 const DemandesCongesRoute = Router();
 

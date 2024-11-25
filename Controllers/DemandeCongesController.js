@@ -1,5 +1,5 @@
-import demandeConges from "../Models/demandeConges.js";
-import Employes from "../Models/Employes.js";
+import {demandeConges} from "../Models/Relations.js";
+import {Employes} from "../Models/Relations.js";
 import { validationResult } from "express-validator";
 
 // 1. Liste de toutes les demandes de congé
