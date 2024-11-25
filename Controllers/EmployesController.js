@@ -1,5 +1,5 @@
-import Employes from "../Models/Employes.js";
-import Types from "../Models/Types.js";
+import {Employes} from "../Models/Relations.js";
+import {Types} from "../Models/Relations.js";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 
