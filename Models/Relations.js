@@ -20,7 +20,7 @@ import Rapports from "./Rapports.js";
 // Employe - Type (One-to-One)
 Types.hasMany(Employes, { foreignKey: 'idType_Employe' });
 Employes.belongsTo(Types, { foreignKey: 'idType_Employe' });
-
+ 
 
 // Employe - Retard (One-to-Many)
 Employes.hasMany(Retards, { foreignKey: 'idEmploye_Retards' });

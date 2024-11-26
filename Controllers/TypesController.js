@@ -1,4 +1,4 @@
-import Types from "../Models/Types.js";
+import {Types} from "../Models/Relations.js";
 
 // Créer un type d'abscence
 export const creerType = async (req, res) => {
