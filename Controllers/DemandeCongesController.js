@@ -1,7 +1,8 @@
-import demandeConges from "../Models/demandeConges.js";
-import Employes from "../Models/Employes.js";
+import {demandeConges} from "../Models/Relations.js";
+import {Employes} from "../Models/Relations.js";
+import { validationResult } from "express-validator";
 
-// 1. Liste de tous les employés
+// 1. Liste de toutes les demandes de congé
 export const listDemandesConges = async (req, res) => {
     try {
         const demandes = await demandeConges.findAll({
@@ -16,8 +17,13 @@ export const listDemandesConges = async (req, res) => {
     }
 };
 
-// 2. Ajout dun employé
+// 2. Ajout d'une demande de congé
 export const ajoutDemandeConge = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { dateDebutCong, dateFinCong, motifCong, etatDemandCong, idEmploye_DemandeConges } = req.body;
 
     try {
@@ -34,51 +40,54 @@ export const ajoutDemandeConge = async (req, res) => {
     }
 };
 
-// 3. Modification d' un employé
+// 3. Modification d'une demande de congé
 export const modifierDemandeConge = async (req, res) => {
-    const idDemandCong = parseInt(req.params.id);
-    const nouvellesInfos = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const idDemande = parseInt(req.params.id);
+    const nouvellesInfosDemande = req.body;
 
     try {
-        const demandeAModifier = await demandeConges.findByPk(idDemandCong);
-
-        if (!demandeAModifier) {
+        const demande = await demandeConges.findByPk(idDemande);
+        if (!demande) {
             return res.status(404).json({ message: "Demande de congé non trouvée" });
         }
 
-        await demandeAModifier.update(nouvellesInfos);
-        res.status(200).json({ message: "Demande de congé modifiée avec succès", data: demandeAModifier });
+        await demande.update(nouvellesInfosDemande);
+        res.status(200).json({ message: "Demande de congé mise à jour avec succès", data: demande });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
 
-// 4 Suppression d' un employé
+// 4. Suppression d'une demande de congé
 export const supprimerDemandeConge = async (req, res) => {
-    const idDemandCong = parseInt(req.params.id);
+    const idDemande = parseInt(req.params.id);
 
     try {
-        const demandeASupprimer = await demandeConges.findByPk(idDemandCong);
-
-        if (!demandeASupprimer) {
+        const demande = await demandeConges.findByPk(idDemande);
+        if (!demande) {
             return res.status(404).json({ message: "Demande de congé non trouvée" });
         }
 
-        await demandeASupprimer.destroy();
+        await demande.destroy();
         res.status(200).json({ message: "Demande de congé supprimée avec succès" });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
 
-// 5. Liste les employés d'un type spécifique
+// 5. Liste des demandes de congé par employé
 export const listDemandesCongesEmploye = async (req, res) => {
     const idEmploye = parseInt(req.params.id);
 
     try {
         const demandes = await demandeConges.findAll({ where: { idEmploye_DemandeConges: idEmploye } });
-        res.status(200).json({ data: demandes });
+        res.status(200).json(demandes);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
