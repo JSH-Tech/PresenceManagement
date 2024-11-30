@@ -1,8 +1,9 @@
 import { type } from "os";
 import { DataTypes } from "sequelize";
+import connexion from "../config/connexion.js";
 
 
-const Employes={
+const Employes=connexion.define("Employes", {
 
     idEmploye:{
         type: DataTypes.INTEGER,
@@ -41,16 +42,16 @@ const Employes={
         allowNull: false,
     },
     
-    idType_Employe: {  // Clé étrangère vers le modèle Types
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "Types", // Nom de la table Types
-            key: "idType",  // Clé primaire dans la table Types
-        },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-    },
-}
+    // idType_Employe: {  // Clé étrangère vers le modèle Types
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     references: {
+    //         model: "Types", // Nom de la table Types
+    //         key: "idType",  // Clé primaire dans la table Types
+    //     },
+    //     onDelete: "CASCADE",
+    //     onUpdate: "CASCADE",
+    // },
+})
 
 export default Employes;
