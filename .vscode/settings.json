@@ -10,9 +10,9 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "GenrealConnexion",
-            "database": "db_PresenceManager",
+            "database": "sakila",
             "username": "root",
-            "password": ""
+            "password": "root"
         }
     ]
 }

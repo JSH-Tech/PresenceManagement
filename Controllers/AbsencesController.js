@@ -17,7 +17,7 @@ export const creerAbsence = async (req, res) => {
 export const obtenirToutAbsences = async (req, res) => {
     try {
         const absences = await Absences.findAll();
-        res.status(200).json(absences);
+        res.status(200).json({data:absences});
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -28,7 +28,7 @@ export const obtenirAbsenceParId = async (req, res) => {
     try {
         const absence = await Absences.findByPk(req.params.id);
         if (!absence) return res.status(404).json({ message: 'Absence non trouvée' });
-        res.status(200).json(absence);
+        res.status(200).json({data:absence});
     } catch (err) {
         res.status(400).json({ error: err.message });
     }

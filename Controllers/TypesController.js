@@ -1,7 +1,16 @@
 import {Types} from "../Models/Relations.js";
-
-// Créer un type d'abscence
+import { validationResult } from "express-validator";
+// Créer un type
 export const creerType = async (req, res) => {
+
+    // Vérification des champs requis
+    const errors=validationResult(req)
+
+    //Si les données sont invalides, renvoi une erreur avec le message d'erreur
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors:errors.array()});
+    }
+    
     try {
         const type = await Types.create(req.body);
         res.status(201).json(type);

@@ -3,22 +3,23 @@ import {Employes} from "../Models/Relations.js";
 import { validationResult } from "express-validator";
 
 //1- Liste des rapports
-export const listRapports = async(req,res)=> {
+export const listRapports = async (req, res) => {
     try {
-        //Récupération de tous les rapports avec la jointure entre Employes et Rapports
         const rapports = await Rapports.findAll({
             include: [
                 {
                     model: Employes,
-                    attributes: ["idEmploye",'nomEmploye',"prenomEmploye"],
-                }
-            ]
+                    attributes: ["idEmploye", "nomEmploye", "prenomEmploye"],
+                },
+            ],
         });
-        res.json(rapports);
+        console.log(rapports); // Inspectez ici les données
+        res.json({ data: rapports });
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.status(500).json({ message: error.message });
     }
-}
+};
+
 
 //2- Ajout d'un rapport
 
@@ -33,11 +34,16 @@ export const ajoutRapport = async(req,res)=> {
     if(!errors.isEmpty()) {
         return res.status(400).json({errors:errors.array()});
     }
+    
     try {
-        const rapport = await Rapports.create({nouveauRapport});
+        const employe = await Employes.findByPk(nouveauRapport.idEmploye_Rapports);
+        if (!employe) {
+            return res.status(400).json({ message: "L'employé n'existe pas ou a été supprimé." });
+        }
+        const rapport = await Rapports.create(nouveauRapport);
         res.status(201).json(rapport);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(401).json({message: error.message});
     }
 }
 
@@ -58,7 +64,7 @@ export const modifierRapport = async(req,res)=> {
             return res.status(404).json({message: "Rapport non trouvé"});
         }
         await rapport.update(rapportMiseAJour);
-        rapport.Reload();
+        rapport.reload();
 
         res.status(200).json({message:"Rapport modifié avec succes",data:rapportMiseAJour})
     }
@@ -99,9 +105,19 @@ export const listRapportsEmployee = async(req,res)=> {
                 }
             ]
         });
-        res.json(rapports);
+        res.json({data:rapports});
     } catch (error) {
         res.status(500).json({message: error.message});
     }
 }
 
+// 6-Obtnenir un rapport par son ID
+export const obtenirRapportParId = async (req, res) => {
+    try {
+        const rapport = await Rapports.findByPk(req.params.id);
+        if (!rapport) return res.status(404).json({ message: 'Rapport non trouvé' });
+        res.status(200).json({data:rapport});
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};

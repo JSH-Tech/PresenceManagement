@@ -3,7 +3,7 @@ import { creerAbsence, obtenirAbsenceParId, obtenirToutAbsences, mettreAJourAbse
 import absenceValide from "../Validations/ValidationAbsence.js";
 const AbsencesRoute = Router();
 
-AbsencesRoute.post('/absences/creer',absenceValide, creerAbsence);
+AbsencesRoute.post('/creer',absenceValide, creerAbsence);
 AbsencesRoute.get('/obtenirAbsence', obtenirToutAbsences);
 AbsencesRoute.get('/obtenirAbsenceParId/:id', obtenirAbsenceParId);
 AbsencesRoute.put('/mettreAJourAbsence/:id',absenceValide, mettreAJourAbsence);

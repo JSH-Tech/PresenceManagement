@@ -1,9 +1,24 @@
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 
-const typeValide=[
-    body("typeAbsence").isString().withMessage("Veuillez sélectionner le type d'absence"),
-    body("justificationAbsence").isLength({min: 250}).withMessage("La jutification doit etre minimum 250 caracteres"),
-    body("idEmploye_Type").isInt().withMessage("Veuillez selectionnner un employe")
+const typeValide = [
+    // Validation pour le champ nomType
+    body("nomType")
+        .isString()
+        .withMessage("Le nom du type doit être une chaîne de caractères.")
+        .notEmpty()
+        .withMessage("Le nom du type ne peut pas être vide.")
+        .isLength({ min: 3, max: 100 })
+        .withMessage("Le nom du type doit comporter entre 3 et 100 caractères."),
+    
+    // Validation pour le champ descriptionType (facultatif)
+    body("descriptionType")
+        .optional() // Champ facultatif
+        .isString()
+        .withMessage("La description doit être une chaîne de caractères.")
+        .isLength({ max: 500 })
+        .withMessage("La description ne peut pas dépasser 500 caractères."),
+    
+    // idType n'est pas requis dans la création car il est auto-incrémenté.
 ];
 
 export default typeValide;

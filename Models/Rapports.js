@@ -23,16 +23,6 @@ const Rapports=connexion.define("Rapports", {
         allowNull: false
     },
 
-    // idEmploye_Rapport: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'employes',
-    //         key: 'idEmploye',
-    //     },
-    //     allowNull: false,
-    //     onDelete:"CASCADE",
-    //     onUpdate:"CASCADE"
-    // }
 })
 
 export default Rapports;
